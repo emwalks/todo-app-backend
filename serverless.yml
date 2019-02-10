@@ -1,0 +1,30 @@
+service: tasks-service 
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: eu-west-2
+  environment: 
+    RDS_HOST: ${opt:RDS_HOST}
+    RDS_USER: ${opt:RDS_USER}
+    RDS_PASSWORD: ${opt:RDS_PASSWORD}
+    RDS_DATABASE: ${opt:RDS_DATABASE}
+
+functions:
+  tasks:
+    handler: tasks.handler
+    # the events block below defines how to trigger the tasks.handler code
+    events:
+      - http:
+          path: tasks
+          method: get
+          cors: true
+
+# this file provides a template for our function
+# it tells the serverless framework what our function does and how to handle it
+# the functions section can be interpreted as:
+# if someone asks for a URL http\\:tasks on a GET request
+# We want a file called tasks to handle that request using a function called handler
+# NB template has a handler.js (renamed tasks.js)
+# 
+# cors = cross origin resource sharing (allows access to API)
