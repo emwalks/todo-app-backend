@@ -19,6 +19,11 @@ functions:
           path: tasks
           method: get
           cors: true
+      - http:
+          path: tasks/{taskId}
+          #the taskId is a parameter to the URL
+          method: delete
+          cors: true
 
 # this file provides a template for our function
 # it tells the serverless framework what our function does and how to handle it

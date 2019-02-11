@@ -4,6 +4,7 @@ const app = express();
 
 const databaseService = require('./databaseservice')
 
+//app.get is our request type for GET
 app.get('/tasks', function (request, response) {
 
   databaseService.getTasks()
@@ -20,6 +21,27 @@ app.get('/tasks', function (request, response) {
     });
 
 })
+
+app.delete('/tasks/:taskId', function (request, response) {
+
+  const taskIdToBeDeleted = request.params.taskId;
+  //this maps the request path parameter to taskId - express framework
+
+  let someResponse = {
+    message: "You issued a delete request for task id " + taskIdToBeDeleted
+  };
+
+  if(taskIdToBeDeleted > 3 ) {
+    response.status(404);
+    //this adds a status code to help 
+    someResponse = {
+    message: "Task " + taskIdToBeDeleted + " does not exist" 
+      };
+    }
+
+  response.json(someResponse);
+
+});
 
 module.exports.handler = serverless(app);
 
