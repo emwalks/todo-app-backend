@@ -33,11 +33,31 @@ app.delete('/tasks/:taskId', function (request, response) {
 
   if(taskIdToBeDeleted > 3 ) {
     response.status(404);
-    //this adds a status code to help 
+    //this adds a status code to help understand error
     someResponse = {
     message: "Task " + taskIdToBeDeleted + " does not exist" 
       };
     }
+
+  response.json(someResponse);
+
+});
+
+app.post('/tasks/create', function (request, response) {
+
+  let someResponse = {
+    message: "You issued a POST request"
+  };
+
+  response.json(someResponse);
+
+});
+
+app.put('/tasks/update', function (request, response) {
+
+  let someResponse = {
+    message: "You issued a PUT request"
+  };
 
   response.json(someResponse);
 
