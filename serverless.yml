@@ -25,7 +25,7 @@ functions:
           method: delete
           cors: true
       - http:
-          path: tasks/create
+          path: tasks
           method: post
           cors: true
       - http:

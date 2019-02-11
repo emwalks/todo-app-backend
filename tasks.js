@@ -1,6 +1,8 @@
 const serverless = require('serverless-http');
 const express = require('express');
 const app = express();
+app.use(express.json());
+//this registers the middleware we need as long as you have express 4.16
 
 const databaseService = require('./databaseservice')
 
@@ -43,7 +45,13 @@ app.delete('/tasks/:taskId', function (request, response) {
 
 });
 
-app.post('/tasks/create', function (request, response) {
+app.post('/tasks', function (request, response) {
+
+  //note although the path is the same as the get 
+  //we are defining how the backend (?API is this whole code the API?) deals with a post request
+
+  console.log("You sent in a task saying: " + request.body.Description);
+  //pulls in the property of the request body
 
   let someResponse = {
     message: "You issued a POST request"
