@@ -24,7 +24,7 @@ app.get('/tasks', function (request, response) {
 
 })
 
-app.delete('/tasks/:taskId', function (request, response) {
+/*app.delete('/tasks/:taskId', function (request, response) {
 
   const taskIdToBeDeleted = request.params.taskId;
   //this maps the request path parameter to taskId - express framework
@@ -33,41 +33,73 @@ app.delete('/tasks/:taskId', function (request, response) {
     message: "You issued a delete request for task id " + taskIdToBeDeleted
   };
 
-  if(taskIdToBeDeleted > 3 ) {
+  if (taskIdToBeDeleted > 3) {
     response.status(404);
     //this adds a status code to help understand error
     someResponse = {
-    message: "Task " + taskIdToBeDeleted + " does not exist" 
-      };
-    }
+      message: "Task " + taskIdToBeDeleted + " does not exist"
+    };
+  }
 
   response.json(someResponse);
 
 });
+*/
 
 app.post('/tasks', function (request, response) {
-
   //note although the path is the same as the get 
   //we are defining how the backend (?API is this whole code the API?) deals with a post request
 
-  console.log("You sent in a task saying: " + request.body.Description);
-  //pulls in the property of the request body
+  const Description = request.body.Description;
 
-  let someResponse = {
-    message: "You issued a POST request"
-  };
+  databaseService.saveTask(Description)
+    .then(function (results) {
 
-  response.json(someResponse);
+      response.json(results);
+    })
+
+    .catch(function (error) {
+
+      response.status(500);
+      response.json(error);
+
+    });
 
 });
 
-app.put('/tasks/update', function (request, response) {
+app.put('/tasks', function (request, response) {
 
-  let someResponse = {
-    message: "You issued a PUT request"
-  };
 
-  response.json(someResponse);
+  databaseService.updateTask()
+    .then(function (results) {
+
+      response.json(results);
+    })
+
+    .catch(function (error) {
+
+      response.status(500);
+      response.json(error);
+
+    });
+
+});
+
+app.delete('/tasks', function (request, response) {
+
+
+  databaseService.deleteTask()
+    .then(function (results) {
+
+      response.json(results);
+    })
+
+    .catch(function (error) {
+
+      response.status(500);
+      response.json(error);
+
+    });
 
 });
 

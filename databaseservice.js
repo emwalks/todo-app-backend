@@ -15,18 +15,88 @@ function getDatabaseConnection() {
 
 function getTasks() {
     const connection = getDatabaseConnection();
-    return new Promise(function(resolve, reject) {
-        connection.query("SELECT * FROM Tasks", function(error, results, fields) {
+    return new Promise(function (resolve, reject) {
+        connection.query("SELECT * FROM Tasks", function (error, results, fields) {
             if (error) {
                 connection.destroy();
                 return reject(error);
-            } 
+            }
             else {
                 connection.end();
                 return resolve(results);
             }
         });
     });
+}
+
+function saveTask(Description) {
+    const connection = getDatabaseConnection();
+
+    return new Promise(function (resolve, reject) {
+
+        const postData = {
+            Description: Description,
+            Completed: false,
+            UserId: 1
+        };
+        //takes a json object and passes json object to the query SET is the same as INSERT INTO
+        connection.query('INSERT INTO Tasks SET ?', postData, function (error, results, fields) {
+            if (error) {
+                connection.destroy();
+                return reject(error);
+            }
+            else {
+                connection.end();
+                return resolve(results);
+            }
+        });
+
+    });
+
+}
+
+
+function updateTask() {
+    const connection = getDatabaseConnection();
+
+    return new Promise(function (resolve, reject) {
+
+
+        connection.query('UPDATE Tasks SET Completed = True WHERE Description = "complete this weeks homework"', function (error, results, fields) {
+            if (error) {
+                connection.destroy();
+                return reject(error);
+            }
+            else {
+                connection.end();
+                return resolve(results);
+            }
+        });
+
+    });
+
+}
+
+function deleteTask() {
+    const connection = getDatabaseConnection();
+
+    return new Promise(function (resolve, reject) {
+
+
+        connection.query('DELETE FROM Tasks WHERE Description = "complete this weeks homework"', function (error, results, fields) {
+          
+            if (error) {
+                connection.destroy();
+                return reject(error);
+            }
+            else {
+                connection.end();
+                return resolve(results);
+            }
+        });
+
+    });
+
 }
 
 
@@ -40,7 +110,10 @@ function getTasks() {
 //result of this function is a json array of our mysql table as tasks
 
 module.exports = {
-    getTasks
+    getTasks,
+    saveTask,
+    updateTask,
+    deleteTask
 }
 
 //the getDatabaseConnection is not exported because we want our manager to handle connection
