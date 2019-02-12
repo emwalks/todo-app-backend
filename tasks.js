@@ -69,8 +69,9 @@ app.post('/tasks', function (request, response) {
 
 app.put('/tasks', function (request, response) {
 
+  const Description = request.body.Description;
 
-  databaseService.updateTask()
+  databaseService.updateTask(Description)
     .then(function (results) {
 
       response.json(results);
@@ -87,8 +88,14 @@ app.put('/tasks', function (request, response) {
 
 app.delete('/tasks', function (request, response) {
 
+  const Description = request.body.Description;
 
-  databaseService.deleteTask()
+  //you could also delete based on path above by taking in the path as
+  //const taskIdToBeDeleted = request.params.taskId;
+  //then make the taskIdToBeDeleted a parameter of the deleteTask function 
+  //both below and in databaseservice.js
+
+  databaseService.deleteTask(Description)
     .then(function (results) {
 
       response.json(results);

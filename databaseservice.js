@@ -56,13 +56,13 @@ function saveTask(Description) {
 }
 
 
-function updateTask() {
+function updateTask(Description) {
     const connection = getDatabaseConnection();
 
     return new Promise(function (resolve, reject) {
 
 
-        connection.query('UPDATE Tasks SET Completed = True WHERE Description = "complete this weeks homework"', function (error, results, fields) {
+        connection.query('UPDATE Tasks SET Completed = True WHERE Description = ?', Description, function (error, results, fields) {
             if (error) {
                 connection.destroy();
                 return reject(error);
@@ -77,13 +77,13 @@ function updateTask() {
 
 }
 
-function deleteTask() {
+function deleteTask(Description) {
     const connection = getDatabaseConnection();
 
     return new Promise(function (resolve, reject) {
 
 
-        connection.query('DELETE FROM Tasks WHERE Description = "complete this weeks homework"', function (error, results, fields) {
+        connection.query('DELETE FROM Tasks WHERE Description = ?', Description, function (error, results, fields) {
           
             if (error) {
                 connection.destroy();
