@@ -20,8 +20,7 @@ functions:
           method: get
           cors: true
       - http:
-          path: tasks
-          #path: tasks/{taskId}
+          path: tasks/{taskId}
           #the taskId is a parameter to the URL
           method: delete
           cors: true

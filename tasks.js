@@ -86,27 +86,24 @@ app.put('/tasks', function (request, response) {
 
 });
 
-app.delete('/tasks', function (request, response) {
+app.delete('/tasks/:taskId', function (request, response) {
 
-  const Description = request.body.Description;
+  
+  const taskIdToBeDeleted = request.params.taskId;
+//this maps the request path parameter to taskId - express framework
 
-  //you could also delete based on path above by taking in the path as
-  //const taskIdToBeDeleted = request.params.taskId;
-  //then make the taskIdToBeDeleted a parameter of the deleteTask function 
-  //both below and in databaseservice.js
+databaseService.deleteTask(taskIdToBeDeleted)
+  .then(function (results) {
 
-  databaseService.deleteTask(Description)
-    .then(function (results) {
+    response.json(results);
+  })
 
-      response.json(results);
-    })
+  .catch(function (error) {
 
-    .catch(function (error) {
+    response.status(500);
+    response.json(error);
 
-      response.status(500);
-      response.json(error);
-
-    });
+  });
 
 });
 
