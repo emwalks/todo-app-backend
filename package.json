@@ -18,10 +18,9 @@
   },
   "homepage": "https://github.com/emwalks/todo-app-backend#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "mysql": "^2.16.0",
     "serverless-http": "^1.9.0"
   }
 }
-
-//package.json mangages all the dependancies for your code - e.g. the frameworks that are required

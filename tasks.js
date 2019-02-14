@@ -1,7 +1,11 @@
 const serverless = require('serverless-http');
 const express = require('express');
 const app = express();
+const cors = require('cors');
+
 app.use(express.json());
+app.use(cors());
+//this cors middleware adds a header to allow connections
 //this registers the middleware we need as long as you have express 4.16
 
 const databaseService = require('./databaseservice')
@@ -24,27 +28,7 @@ app.get('/tasks', function (request, response) {
 
 })
 
-/*app.delete('/tasks/:taskId', function (request, response) {
 
-  const taskIdToBeDeleted = request.params.taskId;
-  //this maps the request path parameter to taskId - express framework
-
-  let someResponse = {
-    message: "You issued a delete request for task id " + taskIdToBeDeleted
-  };
-
-  if (taskIdToBeDeleted > 3) {
-    response.status(404);
-    //this adds a status code to help understand error
-    someResponse = {
-      message: "Task " + taskIdToBeDeleted + " does not exist"
-    };
-  }
-
-  response.json(someResponse);
-
-});
-*/
 
 app.post('/tasks', function (request, response) {
   //note although the path is the same as the get 
