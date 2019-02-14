@@ -67,11 +67,11 @@ app.post('/tasks', function (request, response) {
 
 });
 
-app.put('/tasks', function (request, response) {
+app.put('/tasks/:taskId', function (request, response) {
 
-  const Description = request.body.Description;
+  const taskIdToBeDeleted = request.params.taskId;
 
-  databaseService.updateTask(Description)
+  databaseService.updateTask(taskIdToBeDeleted)
     .then(function (results) {
 
       response.json(results);

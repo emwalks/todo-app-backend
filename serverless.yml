@@ -29,7 +29,7 @@ functions:
           method: post
           cors: true
       - http:
-          path: tasks
+          path: tasks/{taskId}
           method: put
           cors: true
 

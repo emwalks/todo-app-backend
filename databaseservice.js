@@ -56,13 +56,13 @@ function saveTask(Description) {
 }
 
 
-function updateTask(Description) {
+function updateTask(taskIdToBeDeleted) {
     const connection = getDatabaseConnection();
 
     return new Promise(function (resolve, reject) {
 
 
-        connection.query('UPDATE Tasks SET Completed = True WHERE Description = ?', Description, function (error, results, fields) {
+        connection.query('UPDATE Tasks SET Completed = True WHERE TaskId = ?', taskIdToBeDeleted, function (error, results, fields) {
             if (error) {
                 connection.destroy();
                 return reject(error);
