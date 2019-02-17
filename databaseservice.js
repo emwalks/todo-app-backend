@@ -22,8 +22,10 @@ function getTasks() {
                 return reject(error);
             }
             else {
-                connection.end();
-                return resolve(results);
+                connection.end(function () {
+                    return resolve(results);
+                });
+
             }
         });
     });
@@ -46,8 +48,10 @@ function saveTask(Description) {
                 return reject(error);
             }
             else {
-                connection.end();
-                return resolve(results);
+                connection.end(function () {
+                    return resolve(results);
+                });
+
             }
         });
 
@@ -68,8 +72,10 @@ function updateTask(taskIdToBeDeleted) {
                 return reject(error);
             }
             else {
-                connection.end();
-                return resolve(results);
+                connection.end(function () {
+                    return resolve(results);
+                });
+
             }
         });
 
@@ -84,14 +90,16 @@ function deleteTask(taskIdToBeDeleted) {
 
 
         connection.query('DELETE FROM Tasks WHERE TaskId = ?', taskIdToBeDeleted, function (error, results, fields) {
-          
+
             if (error) {
                 connection.destroy();
                 return reject(error);
             }
             else {
-                connection.end();
-                return resolve(results);
+                connection.end(function () {
+                    return resolve(results);
+                });
+
             }
         });
 
