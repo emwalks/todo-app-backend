@@ -1,7 +1,7 @@
 
 # todo-app-backend
 
-Back-end repository for node REST API connecting React 'Don't Worry Brie Happy' App front-end to AWS mySQL RDS by creating AWS Lambda function.
+Back-end repository for node REST API connecting React 'to-do-app-frontend' App to AWS mySQL RDS by creating AWS Lambda function.
 
 ## Pre-requisites 
 
