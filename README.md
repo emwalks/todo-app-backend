@@ -5,19 +5,21 @@ Back-end repository for node REST API connecting React 'to-do-app-frontend' App 
 
 ## Pre-requisites 
 
+Ensure serverless framework is installed: 
+
+#### `npm install --global serverless`
+
+Then all other dependencies managed by node:
+
+#### `npm install`
+
+## Dependencies
+
 - node 
 - Express
 - Serverless
 - CORS
 - mySQL
-
-Initialise with node: 
-
-#### `npm init -f`
-
-Install frameworks:
-
-#### `npm install --save express serverless-http cors mysql`
 
 ## Deployment
 
